@@ -1,0 +1,50 @@
+package com.offerutils.managers
+
+import com.orhanobut.hawk.Hawk
+
+class DataManager {
+
+    enum class Type {
+        COINS_BALANCE, IS_FIRST_TIME, RATE_US, POOL_PAYMENT_TIME, LOCK_SCREEN_AD, SETTINGS_SOUND, SETTINGS_NOTIFICATIONS, CURRENT_DAY, DIALOG_COUNTER, SHOW_RATE_US_DIALOG, USER_EMAIL, USER_NAME, USER_WALLET, INTERSTITIAL_COUNTER,
+        USER_INVITE_CODE, ENTERED_CODE, GIFT_IS_READY, SLOTS_BONUS_ATTEMPTS, GIFT_CHARGE, FRIEND_INVITE, REMOVED_NOTIFICATION, MOTIVATION_TIME, HIDE_EXTRA_BUTTON, IS_FYBER_VIDEO, IS_NAME_REWARDED, IS_EMAIL_REWARDED, CURRENT_BOOSTER, TIMER_BOOST,
+        //analytics
+        REWARD_COUNT,
+        START_APP_DATE, GIFT_COUNT, AUTOSPIN_COUNT, BOOSTER_COUNT,
+        //settings
+        SETTINGS_ADCOLONY,
+        SETTINGS_VUNGLE, SETTINGS_APPLOVIN, SETTINGS_FYBER, SETTINGS_TIME_DIVIDER, SETTINGS_SLOTS_TM, SETTINGS_ROULETTE_TM, SETTINGS_GIFT_TM, SETTINGS_UNITY,
+        SETTINGS_SAVED_EMAIL, SETTINGS_SAVED_NAME, SETTINGS_IS_EMAIL_SAVED, SETTINGS_IS_NAME_SAVED, SETTINGS_AUTOSPIN_TIMER,
+        //cards
+        WM_MAIL,
+        PP_MAIL, VISA_CARD_NUMBER, PAYTM_MAIL,
+        //boosters
+        BOOSTER_IS_ACTIVE, MINING_IS_ACTIVE, BOOSTER_LEFT_TIME,
+        BOOSTER,
+        AUTOSPIN,
+        //timers
+        TIMER_ROULETTE,
+        TIMER_GIFTBOX,
+        ROLLBACK_TIMER,
+        MONEYBOX_TIMER,
+        GAME_TIMER,
+        BONUS_TIMER,
+        IS_GIFT_READY,
+        //games
+        SLOTS_ATTEMPTS, SLOTS_HAS_ADDITIONAL,
+        MONEY_BOX_ATTEMPTS, MONEY_BOX_HAS_ADDITIONAL,
+        ROULETTE_ATTEMPTS, ROULETTE_HAS_ADDITIONAL,
+        GAME_ATTEMPTS, GAME_HAS_ADDITIONAL,
+        //CHECKIN
+        NEXT_DAY, DAYS_COUNT, CHECK_IN_START
+
+    }
+
+    fun <dataType>saveData(key: String, value: dataType) = Hawk.put(key, value)
+
+    fun <dataType>saveData(key: Type, value: dataType) = saveData(key.name, value)
+
+    fun <dataType>getData(key: Type, defValue: dataType) : dataType = getData<dataType>(key.name, defValue)
+
+    fun <dataType>getData(key: String, defValue: dataType) : dataType = Hawk.get(key, defValue)
+
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="StateImageView">
+        <attr name="state_selected" format="reference"/>
+        <attr name="state_pressed" format="reference"/>
+        <attr name="state_disabled" format="reference"/>
+    </declare-styleable>
+
+</resources>
