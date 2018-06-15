@@ -5,9 +5,10 @@ import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
 import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
+import android.widget.ImageView
 import com.offerutils.R
 
-class StateImageView: AppCompatImageView{
+class StateImageView: ImageView {
 
     private var stateDefault: Drawable? = null
     var stateSelected: Drawable? = null

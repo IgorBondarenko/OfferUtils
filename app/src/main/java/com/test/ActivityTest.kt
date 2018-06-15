@@ -27,6 +27,8 @@ class ActivityTest : Activity(), OfferwallView<Float> {
 
         setContentView(R.layout.start)
 
+        image.setOnClickListener {  }
+
         button.setOnClickListener {
 
             dataManager.saveData("test", "test")
