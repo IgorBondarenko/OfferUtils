@@ -16,14 +16,12 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     private var balanceView: TextView? = null
     private var soundRes: Int = 0
 
-    constructor(dataManager: DataManager, activity: Activity, animationManager: AnimationManager, textView: TextView, @RawRes coinsDropSound: Int = 0) : this(dataManager) {
+    constructor(dataManager: DataManager, activity: Activity, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int = 0) : this(dataManager) {
         this.activity = activity
         this.animationManager = animationManager
         this.balanceView = textView
         this.soundRes = coinsDropSound
     }
-
-    private val currency = "Coins"
 
     abstract fun subtractCoins(amount: currencyType)
 
@@ -33,9 +31,9 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         }
     }
 
-    abstract fun addCoins(value: currencyType, showToast: Boolean = true, customToast: String = "$value $currency added to your balance")
+    abstract fun addCoins(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance")
 
-    protected fun addCoinsInteraction(value: currencyType, showToast: Boolean = true, customToast: String = "$value $currency added to your balance") {
+    protected fun addCoinsInteraction(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance") {
         activity?.runOnUiThread {
             animationManager?.changeText(balanceView, getBalance().toString(), AnimationManager.Direction.TOP_TO_BOTTOM)
 
@@ -46,12 +44,18 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         }
     }
 
-    fun setCoinsCountInToolbar(activity: Activity, textView: TextView) = activity.runOnUiThread {
-        textView.text = getBalance().toString()
+    /**
+     * call in activity onResume()
+     */
+    fun Activity.setCoinsCountInToolbar() = runOnUiThread {
+        balanceView?.text = getBalance().toString()
     }
 
-    fun setCoinsCountInToolbar(fragment: Fragment, textView: TextView) = activity?.runOnUiThread {
-        textView.text = getBalance().toString()
+    /**
+     * call in fragment onResume()
+     */
+    fun Fragment.setCoinsCountInToolbar() = activity?.runOnUiThread {
+        balanceView?.text = getBalance().toString()
     }
 
     abstract fun getBalance(): currencyType

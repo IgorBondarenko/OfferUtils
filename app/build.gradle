@@ -36,7 +36,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 
-    implementation(name: 'offerutils-release', ext: 'aar')
+//    implementation(name: 'offerutils-release', ext: 'aar')
 
     //coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.2'
@@ -48,5 +48,5 @@ dependencies {
     //hawk
     implementation 'com.orhanobut:hawk:2.0.1'
 
-//    implementation 'com.github.IgorBondarenko:OfferUtils:1.0'
+    implementation 'com.github.IgorBondarenko:OfferUtils:1.0.3'
 }

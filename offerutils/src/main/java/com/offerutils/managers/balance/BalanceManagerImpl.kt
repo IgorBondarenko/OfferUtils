@@ -19,9 +19,9 @@ class BalanceManagerInt : BalanceManager<Int> {
         subtractCoinsInteraction()
     }
 
-    override fun addCoins(value: Int, showToast: Boolean, customToast: String) {
+    override fun addCoins(value: Int, showToast: Boolean, currency: String, customToast: String) {
         dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() + value)
-        addCoinsInteraction(value, showToast, customToast)
+        addCoinsInteraction(value, showToast, currency, customToast)
     }
 
     override fun getBalance(): Int = dataManager.getData(DataManager.Type.COINS_BALANCE, 0)
@@ -39,9 +39,9 @@ class BalanceManagerFloat : BalanceManager<Float> {
         subtractCoinsInteraction()
     }
 
-    override fun addCoins(value: Float, showToast: Boolean, customToast: String) {
+    override fun addCoins(value: Float, showToast: Boolean, currency: String, customToast: String) {
         dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() + value)
-        addCoinsInteraction(value, showToast, customToast)
+        addCoinsInteraction(value, showToast, currency, customToast)
     }
 
     override fun getBalance(): Float = dataManager.getData(DataManager.Type.COINS_BALANCE, 0f)
