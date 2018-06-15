@@ -20,10 +20,6 @@ android {
         }
     }
 
-    packagingOptions {
-        exclude 'META-INF/main.kotlin_module'
-    }
-
 }
 
 dependencies {
@@ -46,6 +42,7 @@ dependencies {
     //hawk
     implementation 'com.orhanobut:hawk:2.0.1'
 }
+
 repositories {
     mavenCentral()
 }

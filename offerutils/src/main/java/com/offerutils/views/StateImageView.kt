@@ -3,29 +3,31 @@ package com.offerutils.views
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
-import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.offerutils.R
 
-class StateImageView: ImageView {
+class StateImageView(context: Context, attrs: AttributeSet) : ImageView(context, attrs) {
 
-    private var stateDefault: Drawable? = null
-    var stateSelected: Drawable? = null
-    var statePressed: Drawable? = null
-    var stateDisabled: Drawable? = null
-
-    constructor(context: Context): super(context)
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs){
-        initViews(context, attrs)
-    }
-
-    private fun initViews(context: Context, attrs: AttributeSet) {
+    init {
         initAttrs(context, attrs)
-        stateDefault = this.drawable
-        updateDrawableStates()
     }
+
+    var stateSelected: Drawable? = null
+        set(value) {
+            field = value
+            updateDrawableStates()
+        }
+    var statePressed: Drawable? = null
+        set(value) {
+            field = value
+            updateDrawableStates()
+        }
+    var stateDisabled: Drawable? = null
+        set(value) {
+            field = value
+            updateDrawableStates()
+        }
 
     private fun initAttrs(context: Context, attrs: AttributeSet) {
         val attributes = context.obtainStyledAttributes(attrs, R.styleable.StateImageView) ?: return
@@ -37,11 +39,12 @@ class StateImageView: ImageView {
         attributes.recycle()
     }
 
-    private fun updateDrawableStates(){
-        with(StateListDrawable()){
+    private fun updateDrawableStates() {
+        with(StateListDrawable()) {
             addState(intArrayOf(android.R.attr.state_pressed), statePressed)
             addState(intArrayOf(android.R.attr.state_selected), stateSelected)
             addState(intArrayOf(-android.R.attr.state_enabled), stateDisabled)
+            addState(intArrayOf(), this@StateImageView.drawable)
             setImageDrawable(this)
         }
     }

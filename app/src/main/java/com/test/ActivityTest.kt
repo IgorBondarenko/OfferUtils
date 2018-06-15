@@ -3,7 +3,7 @@ package com.test
 import android.app.Activity
 import android.app.AlarmManager
 import android.os.Bundle
-import com.offerutils.R
+import com.offerutils.extensions.launchInUIWithDelay
 import com.offerutils.managers.DataManager
 import com.offerutils.managers.notification.NotificationManager
 import com.offerutils.managers.balance.BalanceManager
@@ -29,6 +29,11 @@ class ActivityTest : Activity(), OfferwallView<Float> {
 
         image.setOnClickListener {  }
 
+        launchInUIWithDelay(3000){
+            image.setImageDrawable(resources.getDrawable(R.color.colorAccent))
+            image.statePressed = resources.getDrawable(R.color.colorPrimary)
+        }
+
         button.setOnClickListener {
 
             dataManager.saveData("test", "test")
@@ -36,7 +41,7 @@ class ActivityTest : Activity(), OfferwallView<Float> {
         }
 
         notificationManager.start(this, NotificationManager.SingleNotification(
-            "test.test.test", AlarmManager.INTERVAL_HOUR / 360, "test", R.drawable.abc_ic_star_half_black_48dp, R.drawable.ic_launcher_background
+            1, "test.test.test", AlarmManager.INTERVAL_HOUR / 360, "test", R.drawable.abc_ic_star_half_black_48dp, R.drawable.ic_launcher_background
         ))
     }
 
