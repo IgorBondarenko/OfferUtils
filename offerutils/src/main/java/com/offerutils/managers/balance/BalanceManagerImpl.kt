@@ -10,8 +10,8 @@ class BalanceManagerInt : BalanceManager<Int> {
 
     constructor(dataManager: DataManager) : super(dataManager)
 
-    constructor(dataManager: DataManager, activity: Activity, animationManager: AnimationManager, textView: TextView, @RawRes coinsDropSound: Int) :
-            super(dataManager, activity, animationManager, textView, coinsDropSound)
+    constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView, @RawRes coinsDropSound: Int) :
+            super(activity, dataManager, animationManager, textView, coinsDropSound)
 
 
     override fun subtractCoins(amount: Int) {
@@ -31,8 +31,8 @@ class BalanceManagerFloat : BalanceManager<Float> {
 
     constructor(dataManager: DataManager) : super(dataManager)
 
-    constructor(dataManager: DataManager, activity: Activity, animationManager: AnimationManager, textView: TextView, @RawRes coinsDropSound: Int) :
-            super(dataManager, activity, animationManager, textView, coinsDropSound)
+    constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView, @RawRes coinsDropSound: Int) :
+            super(activity, dataManager, animationManager, textView, coinsDropSound)
 
     override fun subtractCoins(amount: Float) {
         dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() - amount)

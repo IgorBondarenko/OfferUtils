@@ -16,7 +16,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     private var balanceView: TextView? = null
     private var soundRes: Int = 0
 
-    constructor(dataManager: DataManager, activity: Activity, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int = 0) : this(dataManager) {
+    constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int = 0) : this(dataManager) {
         this.activity = activity
         this.animationManager = animationManager
         this.balanceView = textView
@@ -47,14 +47,14 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     /**
      * call in activity onResume()
      */
-    fun Activity.setCoinsCountInToolbar() = runOnUiThread {
+    fun setCoinsCountInToolbar(activity: Activity) = activity.runOnUiThread {
         balanceView?.text = getBalance().toString()
     }
 
     /**
      * call in fragment onResume()
      */
-    fun Fragment.setCoinsCountInToolbar() = activity?.runOnUiThread {
+    fun setCoinsCountInFragmentToolbar(fragment: Fragment) = fragment.activity?.runOnUiThread {
         balanceView?.text = getBalance().toString()
     }
 

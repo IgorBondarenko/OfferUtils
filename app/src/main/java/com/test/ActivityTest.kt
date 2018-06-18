@@ -4,9 +4,11 @@ import android.app.Activity
 import android.app.AlarmManager
 import android.os.Bundle
 import com.offerutils.extensions.launchInUIWithDelay
+import com.offerutils.managers.AnimationManager
 import com.offerutils.managers.DataManager
 import com.offerutils.managers.notification.NotificationManager
 import com.offerutils.managers.balance.BalanceManager
+import com.offerutils.managers.balance.BalanceManagerInt
 import com.offerutils.managers.offers.OfferwallManager
 import com.offerutils.managers.offers.OfferwallsManagerFloat
 import com.offerutils.mvp.views.OfferwallView
@@ -17,6 +19,8 @@ class ActivityTest : Activity(), OfferwallView<Float> {
     override val offerwallManager: OfferwallManager<Float> = OfferwallsManagerFloat
 
     lateinit var balanceManager: BalanceManager<Float>
+
+    lateinit var animationManager: AnimationManager
 
     val notificationManager = NotificationManager()
 
@@ -39,6 +43,8 @@ class ActivityTest : Activity(), OfferwallView<Float> {
             dataManager.saveData("test", "test")
 
         }
+
+        animationManager = AnimationManager(this)
 
         notificationManager.start(this, NotificationManager.SingleNotification(
             1, "test.test.test", AlarmManager.INTERVAL_HOUR / 360, "test", R.drawable.abc_ic_star_half_black_48dp, R.drawable.ic_launcher_background
