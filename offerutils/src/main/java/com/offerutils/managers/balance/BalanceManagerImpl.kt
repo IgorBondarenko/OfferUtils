@@ -25,6 +25,7 @@ class BalanceManagerInt : BalanceManager<Int> {
     }
 
     override fun getBalance(): Int = dataManager.getData(DataManager.Type.COINS_BALANCE, 0)
+
 }
 
 class BalanceManagerFloat : BalanceManager<Float> {
@@ -45,4 +46,5 @@ class BalanceManagerFloat : BalanceManager<Float> {
     }
 
     override fun getBalance(): Float = dataManager.getData(DataManager.Type.COINS_BALANCE, 0f)
+
 }
