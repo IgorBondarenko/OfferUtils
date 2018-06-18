@@ -4,7 +4,7 @@ import android.app.Application
 import android.util.Log
 import com.orhanobut.hawk.Hawk
 
-class UtilsApplication: Application(){
+open class UtilsApplication: Application(){
 
     override fun onCreate() {
         super.onCreate()
