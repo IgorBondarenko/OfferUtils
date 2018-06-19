@@ -14,4 +14,10 @@ interface FyberModel {
 
     fun setFyberVideo() = dataManager.saveData(DataManager.Type.IS_FYBER_VIDEO, true)
 
+    fun saveAgreement(consent: Boolean) {
+        dataManager.saveData(DataManager.Type.FYBER_CONSENT, consent)
+    }
+
+    fun getUserAgreement(): Boolean = dataManager.getData(DataManager.Type.FYBER_CONSENT, false)
+
 }
