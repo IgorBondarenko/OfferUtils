@@ -6,18 +6,21 @@ interface FyberModel {
 
     val dataManager: DataManager
 
-    fun isFyberVideo(): Boolean =
-        dataManager.getData(DataManager.Type.IS_FYBER_VIDEO, false)
+    var isFyberVideo: Boolean
+        get() = dataManager.getData(DataManager.Type.IS_FYBER_VIDEO, false)
             .apply { dataManager.saveData(DataManager.Type.IS_FYBER_VIDEO, false) }
+        set(value){
+            dataManager.saveData(DataManager.Type.IS_FYBER_VIDEO, true)
+        }
 
-    fun resetFyberVideo() = dataManager.saveData(DataManager.Type.IS_FYBER_VIDEO, false)
-
-    fun setFyberVideo() = dataManager.saveData(DataManager.Type.IS_FYBER_VIDEO, true)
-
-    fun saveAgreement(consent: Boolean) {
-        dataManager.saveData(DataManager.Type.FYBER_CONSENT, consent)
+    fun resetFyberVideo() {
+        isFyberVideo = false
     }
 
-    fun getUserAgreement(): Boolean = dataManager.getData(DataManager.Type.FYBER_CONSENT, false)
+    var fyberAgreement: Boolean
+        get() = dataManager.getData(DataManager.Type.FYBER_CONSENT, false)
+        set(value) {
+            dataManager.saveData(DataManager.Type.FYBER_CONSENT, value)
+        }
 
 }

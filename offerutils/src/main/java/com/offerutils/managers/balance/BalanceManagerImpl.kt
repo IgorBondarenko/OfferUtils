@@ -13,18 +13,13 @@ class BalanceManagerInt : BalanceManager<Int> {
     constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int) :
             super(activity, dataManager, animationManager, textView, coinsDropSound)
 
-
-    override fun subtractCoins(amount: Int) {
-        dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() - amount)
-        subtractCoinsInteraction()
+    override fun subtractCoinsRealization(amount: Int) {
+        currentBalance -= amount
     }
 
-    override fun addCoins(value: Int, showToast: Boolean, currency: String, customToast: String) {
-        dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() + value)
-        addCoinsInteraction(value, showToast, currency, customToast)
+    override fun addCoinsRealization(value: Int) {
+        currentBalance += value
     }
-
-    override fun getBalance(): Int = dataManager.getData(DataManager.Type.COINS_BALANCE, 0)
 
 }
 
@@ -35,16 +30,12 @@ class BalanceManagerFloat : BalanceManager<Float> {
     constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int) :
             super(activity, dataManager, animationManager, textView, coinsDropSound)
 
-    override fun subtractCoins(amount: Float) {
-        dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() - amount)
-        subtractCoinsInteraction()
+    override fun subtractCoinsRealization(amount: Float) {
+        currentBalance -= amount
     }
 
-    override fun addCoins(value: Float, showToast: Boolean, currency: String, customToast: String) {
-        dataManager.saveData(DataManager.Type.COINS_BALANCE, getBalance() + value)
-        addCoinsInteraction(value, showToast, currency, customToast)
+    override fun addCoinsRealization(value: Float) {
+        currentBalance += value
     }
-
-    override fun getBalance(): Float = dataManager.getData(DataManager.Type.COINS_BALANCE, 0f)
 
 }

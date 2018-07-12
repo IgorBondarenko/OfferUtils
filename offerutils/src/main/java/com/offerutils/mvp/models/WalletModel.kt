@@ -6,9 +6,10 @@ interface WalletModel{
 
     val dataManager: DataManager
 
-    val wallet : String
+    var wallet : String
         get() = dataManager.getData(DataManager.Type.USER_WALLET, "")
-
-    fun saveWallet(wallet: String) = dataManager.saveData(DataManager.Type.USER_WALLET, wallet)
+        set(value) {
+            dataManager.saveData(DataManager.Type.USER_WALLET, value)
+        }
 
 }

@@ -3,12 +3,12 @@ package com.offerutils.managers.offers
 import android.app.Activity
 import kotlin.concurrent.thread
 
-abstract class OfferwallManager<currencyType: Number>{
+abstract class OfferwallManager<currencyType : Number> {
 
     private val offerwallOfferHashMap = HashMap<Offer, BaseOfferwall<currencyType>>()
 
     enum class Offer {
-        ADCOLONY, VUNGLE, NATIVEX, OFFERTORO, MYOFFERS, ADXMI, SUPER_REWARDS, ADSCEND_MEDIA, FYBER_OFFERWALL, APPLOVIN, FYBER_VIDEO, UNITY, CHARBOOST
+        ADCOLONY, VUNGLE, NATIVEX, OFFERTORO, MYOFFERS, ADXMI, SUPER_REWARDS, ADSCEND_MEDIA, FYBER_OFFERWALL, APPLOVIN, FYBER_VIDEO, UNITY, CHARBOOST, CUSTOM_OFFER1, CUSTOM_OFFER2, CUSTOM_OFFER3
     }
 
     fun addOfferwall(name: Offer, offerwall: BaseOfferwall<currencyType>) =
@@ -27,7 +27,8 @@ abstract class OfferwallManager<currencyType: Number>{
         return list
     }
 
-    fun init(activity: Activity) = offerwallOfferHashMap.values.forEach { mutableEntry -> mutableEntry.init(activity) }
+    fun init(activity: Activity) =
+        offerwallOfferHashMap.values.forEach { mutableEntry -> mutableEntry.init(activity) }
 
     fun onCreate(activity: Activity) =
         offerwallOfferHashMap.values.forEach { mutableEntry -> mutableEntry.onCreate(activity) }

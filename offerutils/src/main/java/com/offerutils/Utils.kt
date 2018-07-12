@@ -30,7 +30,7 @@ object Utils {
 
     fun getApplicationName(context: Context): CharSequence? =context.applicationInfo.loadLabel(context.packageManager)
 
-    fun generateCode(length: Int, toUpperCase: Boolean = true): String = RandomStringUtils
+    fun generaeCode(length: Int, toUpperCase: Boolean = true): String = RandomStringUtils
         .randomAlphanumeric(length)
         .apply { if (toUpperCase) toUpperCase() }
 

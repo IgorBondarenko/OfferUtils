@@ -6,14 +6,25 @@ interface RuModel {
 
     val dataManager: DataManager
 
-    fun isRuShown() = dataManager.getData(DataManager.Type.SHOW_RATE_US_DIALOG, false)
+    var isRuShown: Boolean
+        get() = dataManager.getData(DataManager.Type.SHOW_RATE_US_DIALOG, false)
+        set(value) {
+            dataManager.saveData(DataManager.Type.SHOW_RATE_US_DIALOG, value)
+        }
 
     fun setRuShown(){
-        dataManager.saveData(DataManager.Type.SHOW_RATE_US_DIALOG, true)
+        isRuShown = true
     }
 
-    fun isRated(): Boolean = dataManager.getData(DataManager.Type.RATE_US, false)
+    var isRated: Boolean
+        get() = dataManager.getData(DataManager.Type.RATE_US, false)
+        set(value) {
+            dataManager.saveData(DataManager.Type.RATE_US, value)
+        }
 
-    fun rateUs() = dataManager.saveData(DataManager.Type.RATE_US, true)
+
+    fun rateUs() {
+        isRated = true
+    }
 
 }

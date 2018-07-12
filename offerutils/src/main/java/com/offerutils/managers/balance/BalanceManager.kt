@@ -16,6 +16,12 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     private var balanceView: TextView? = null
     private var soundRes: Int = 0
 
+    protected var currentBalance: currencyType
+        get() = dataManager.getData(DataManager.Type.COINS_BALANCE, 0 as currencyType)
+        set(value) {
+            dataManager.saveData(DataManager.Type.COINS_BALANCE, value)
+        }
+
     constructor(activity: Activity, dataManager: DataManager, animationManager: AnimationManager, textView: TextView?, @RawRes coinsDropSound: Int = 0) : this(dataManager) {
         this.activity = activity
         this.animationManager = animationManager
@@ -23,17 +29,17 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         this.soundRes = coinsDropSound
     }
 
-    abstract fun subtractCoins(amount: currencyType)
-
-    protected fun subtractCoinsInteraction() {
+    fun subtractCoins(amount: currencyType){
+        subtractCoinsRealization(amount)
         activity?.runOnUiThread {
             animationManager?.changeText(balanceView, "${getBalance()}", AnimationManager.Direction.BOTTOM_TO_TOP)
         }
     }
 
-    abstract fun addCoins(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance")
+    protected abstract fun subtractCoinsRealization(amount: currencyType)
 
-    protected fun addCoinsInteraction(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance") {
+    fun addCoins(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance"){
+        addCoinsRealization(value)
         activity?.runOnUiThread {
             animationManager?.changeText(balanceView, getBalance().toString(), AnimationManager.Direction.TOP_TO_BOTTOM)
 
@@ -43,6 +49,8 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
             }
         }
     }
+
+    protected abstract fun addCoinsRealization(value: currencyType)
 
     /**
      * call in activity onResume()
@@ -58,6 +66,6 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         balanceView?.text = getBalance().toString()
     }
 
-    abstract fun getBalance(): currencyType
+    fun getBalance(): currencyType = currentBalance
 
 }

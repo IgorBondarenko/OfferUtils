@@ -7,7 +7,7 @@ object AdManager {
     private val interstitialsHashMap = HashMap<AdManager.Interstitial, BaseInterstitial>()
 
     enum class Interstitial {
-        APPLOVIN, AMAZON
+        APPLOVIN, AMAZON, ADMOB, STARTAPP, CUSTOM_AD1, CUSTOM_AD2, CUSTOM_AD3
     }
 
     fun addInterstitial(name: Interstitial, interstitial: BaseInterstitial) =
