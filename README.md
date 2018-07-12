@@ -5,6 +5,10 @@
 Main dependency:
 
 ```
+packagingOptions {
+  exclude 'META-INF/main.kotlin_module'
+}
+
 allprojects {
   repositories {
     ...
