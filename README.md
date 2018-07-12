@@ -4,16 +4,26 @@
 
 Main dependency:
 
-```
-packagingOptions {
-  exclude 'META-INF/main.kotlin_module'
-}
+*root gradle:*
 
+```
 allprojects {
   repositories {
     ...
     maven { url 'https://jitpack.io' }
    }
+}
+```
+
+*project gradle:*
+
+```
+android {
+
+  packagingOptions {
+    exclude 'META-INF/main.kotlin_module'
+  }
+  
 }
 
 dependencies {
