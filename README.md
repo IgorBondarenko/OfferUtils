@@ -4,18 +4,9 @@
 
 Main dependency:
 
-*root gradle:*
+[![](https://jitpack.io/v/IgorBondarenko/OfferUtils.svg)](https://jitpack.io/#IgorBondarenko/OfferUtils)
 
-```
-allprojects {
-  repositories {
-    ...
-    maven { url 'https://jitpack.io' }
-   }
-}
-```
-
-*project gradle:*
+Also add this to your project gradle:
 
 ```
 android {
@@ -26,14 +17,6 @@ android {
   
 }
 
-dependencies {
-  implementation 'com.github.IgorBondarenko:OfferUtils:1.0.9'
-}
-```
-
-Also don't forget to add this dependecies:
-
-```
 dependencies {
   //coroutines
   implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3'
