@@ -1,13 +1,22 @@
 package com.offerutils.extensions
 
+import android.support.design.widget.TextInputLayout
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
 
-fun EditText.getString(): String = this.text.toString()
+var EditText.textString: String
+    get() =  this.text.toString()
+    set(value) {
+        this.setText(value, TextView.BufferType.EDITABLE)
+    }
 
-fun EditText.setString(text: String) = this.setText(text, TextView.BufferType.EDITABLE)
+var TextInputLayout.textString: String
+    get() = this.editText?.textString ?: ""
+    set(value) {
+        this.editText?.textString = value
+    }
 
 fun EditText.addTextChangedListener(beforeTextChanged: () -> Unit, afterTextChanged: ((editable: Editable?) -> Unit)? = null) {
     addTextChangedListener(object : TextWatcher {

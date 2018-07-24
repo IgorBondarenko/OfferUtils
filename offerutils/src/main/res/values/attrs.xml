@@ -7,4 +7,23 @@
         <attr name="state_disabled" format="reference"/>
     </declare-styleable>
 
+    <declare-styleable name="StateTextView">
+        <attr name="state_top_selected" format="reference"/>
+        <attr name="state_top_pressed" format="reference"/>
+        <attr name="state_top_disabled" format="reference"/>
+
+        <attr name="state_bottom_selected" format="reference"/>
+        <attr name="state_bottom_pressed" format="reference"/>
+        <attr name="state_bottom_disabled" format="reference"/>
+
+        <attr name="state_right_selected" format="reference"/>
+        <attr name="state_right_pressed" format="reference"/>
+        <attr name="state_right_disabled" format="reference"/>
+
+        <attr name="state_left_selected" format="reference"/>
+        <attr name="state_left_pressed" format="reference"/>
+        <attr name="state_left_disabled" format="reference"/>
+
+    </declare-styleable>
+
 </resources>

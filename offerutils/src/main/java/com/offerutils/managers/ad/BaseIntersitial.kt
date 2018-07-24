@@ -1,16 +1,16 @@
 package com.offerutils.managers.ad
 
-import android.content.Context
+import android.app.Activity
 
 interface BaseInterstitial {
 
-    fun init(context: Context)
+    val isReady: Boolean
+
+    fun init(activity: Activity)
 
     fun setOnCloseListener(onAdCloseListener: (() -> Unit)? = null)
 
-    fun isReady(): Boolean
+    fun show(activity: Activity)
 
-    fun show(context: Context)
-
-    fun makeRequest(context: Context)
+    fun makeRequest(activity: Activity)
 }

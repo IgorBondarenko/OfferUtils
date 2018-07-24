@@ -37,10 +37,11 @@ class NotificationReceiver: BroadcastReceiver() {
 
         Log.d("CURRENT_PACKAGE_", "${context.applicationContext?.packageName}")
 
-        val splashIntent = context.packageManager?.getLaunchIntentForPackage(context.applicationContext?.packageName).apply {
-            this?.action = Intent.ACTION_MAIN
-            this?.addCategory(Intent.CATEGORY_LAUNCHER)
-            this?.putExtra(EXTRA_PUSH_ACTION, true)
+        val splashIntent = context.packageManager?.getLaunchIntentForPackage(context.applicationContext?.packageName)?.let {
+            it.action = Intent.ACTION_MAIN
+            it.addCategory(Intent.CATEGORY_LAUNCHER)
+            it.putExtra(EXTRA_PUSH_ACTION, true)
+            it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
         }
 
         notificationBuilder

@@ -1,5 +1,6 @@
 package com.offerutils.managers.ad
 
+import android.app.Activity
 import android.content.Context
 
 object AdManager {
@@ -13,17 +14,18 @@ object AdManager {
     fun addInterstitial(name: Interstitial, interstitial: BaseInterstitial) =
         interstitialsHashMap.put(name, interstitial).let { this }
 
-    fun init(context: Context) {
-        interstitialsHashMap.values.forEach { it.init(context) }
+    fun init(activity: Activity) {
+        interstitialsHashMap.values.forEach { it.init(activity) }
     }
 
-    fun isReady(): Boolean = interstitialsHashMap.values.firstOrNull { it.isReady() } != null
+    val isReady: Boolean
+        get() = interstitialsHashMap.values.firstOrNull()?.isReady() ?: false
 
-    fun showInterstitial(context: Context, onAdCloseListener: (() -> Unit)? = null) {
+    fun showInterstitial(activity: Activity, onAdCloseListener: (() -> Unit)? = null) {
         interstitialsHashMap.values.forEach { it.setOnCloseListener(onAdCloseListener) }
         interstitialsHashMap.values.firstOrNull {
-            it.isReady().apply { if (!this) it.makeRequest(context) }
-        }?.show(context)
+            it.isReady().apply { if (!this) it.makeRequest(activity) }
+        }?.show(activity)
     }
 
 }

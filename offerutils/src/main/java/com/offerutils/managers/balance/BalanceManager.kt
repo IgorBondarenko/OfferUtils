@@ -16,6 +16,8 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     private var balanceView: TextView? = null
     private var soundRes: Int = 0
 
+    var currency = "Coins"
+
     protected var currentBalance: currencyType
         get() = dataManager.getData(DataManager.Type.COINS_BALANCE, 0 as currencyType)
         set(value) {
@@ -29,17 +31,17 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         this.soundRes = coinsDropSound
     }
 
-    fun subtractCoins(amount: currencyType){
-        subtractCoinsRealization(amount)
+    fun subtractFromBalance(amount: currencyType){
+        subtractFromBalanceRealization(amount)
         activity?.runOnUiThread {
             animationManager?.changeText(balanceView, "${getBalance()}", AnimationManager.Direction.BOTTOM_TO_TOP)
         }
     }
 
-    protected abstract fun subtractCoinsRealization(amount: currencyType)
+    protected abstract fun subtractFromBalanceRealization(amount: currencyType)
 
-    fun addCoins(value: currencyType, showToast: Boolean = true, currency: String = "Coins", customToast: String = "$value $currency added to your balance"){
-        addCoinsRealization(value)
+    fun addToBalance(value: currencyType, showToast: Boolean = true, customToast: String = "$value $currency added to your balance"){
+        addToBalanceRealization(value)
         activity?.runOnUiThread {
             animationManager?.changeText(balanceView, getBalance().toString(), AnimationManager.Direction.TOP_TO_BOTTOM)
 
@@ -50,7 +52,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
         }
     }
 
-    protected abstract fun addCoinsRealization(value: currencyType)
+    protected abstract fun addToBalanceRealization(value: currencyType)
 
     /**
      * call in activity onResume()
@@ -62,7 +64,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     /**
      * call in fragment onResume()
      */
-    fun setCoinsCountInFragmentToolbar(fragment: Fragment) = fragment.activity?.runOnUiThread {
+    fun setBalanceCountInFragmentToolbar(fragment: Fragment) = fragment.activity?.runOnUiThread {
         balanceView?.text = getBalance().toString()
     }
 

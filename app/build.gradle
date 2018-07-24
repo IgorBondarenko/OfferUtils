@@ -39,8 +39,8 @@ dependencies {
 //    implementation(name: 'offerutils-release', ext: 'aar')
 
     //coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.2'
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:0.23.3'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.23.3'
 
     //string generator
     implementation 'commons-lang:commons-lang:2.6'
