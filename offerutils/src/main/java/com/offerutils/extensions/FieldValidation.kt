@@ -29,5 +29,5 @@ private fun TextInputLayout.validateField(validation: Boolean, fieldType: String
     else -> true
 }
 
-private fun TextInputLayout.getString() = editText?.getString() ?: ""
+private fun TextInputLayout.getString() = editText?.textString ?: ""
 

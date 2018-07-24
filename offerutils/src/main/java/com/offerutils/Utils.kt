@@ -28,9 +28,9 @@ object Utils {
     fun getUserID(context: Context): String =
         Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
-    fun getApplicationName(context: Context): CharSequence? =context.applicationInfo.loadLabel(context.packageManager)
+    fun getApplicationName(context: Context): CharSequence? = context.applicationInfo.loadLabel(context.packageManager)
 
-    fun generaeCode(length: Int, toUpperCase: Boolean = true): String = RandomStringUtils
+    fun generateCode(length: Int, toUpperCase: Boolean = true): String = RandomStringUtils
         .randomAlphanumeric(length)
         .apply { if (toUpperCase) toUpperCase() }
 

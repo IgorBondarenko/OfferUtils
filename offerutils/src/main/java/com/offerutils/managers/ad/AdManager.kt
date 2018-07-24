@@ -1,7 +1,6 @@
 package com.offerutils.managers.ad
 
 import android.app.Activity
-import android.content.Context
 
 object AdManager {
 
