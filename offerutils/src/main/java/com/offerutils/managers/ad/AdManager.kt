@@ -19,12 +19,12 @@ object AdManager {
     }
 
     val isReady: Boolean
-        get() = interstitialsHashMap.values.firstOrNull()?.isReady() ?: false
+        get() = interstitialsHashMap.values.firstOrNull()?.isReady ?: false
 
     fun showInterstitial(activity: Activity, onAdCloseListener: (() -> Unit)? = null) {
         interstitialsHashMap.values.forEach { it.setOnCloseListener(onAdCloseListener) }
         interstitialsHashMap.values.firstOrNull {
-            it.isReady().apply { if (!this) it.makeRequest(activity) }
+            it.isReady.apply { if (!this) it.makeRequest(activity) }
         }?.show(activity)
     }
 
