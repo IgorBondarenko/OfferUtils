@@ -1,1 +1,1 @@
-include ':app', ':offerutils'
+include ':app', ':offerutils', ':offertoro_manager', ':offertoro_manager'
