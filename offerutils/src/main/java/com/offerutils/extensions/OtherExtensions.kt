@@ -24,4 +24,4 @@ fun doAfterTime(day: Int, month: Int, year: Int, doBefore: (() -> Unit)? = null,
     }
 }
 
-fun Float.format() : String = String.format("%.2f", this)
+fun Float.format(format: String = "%.2f") : String = String.format(format, this)

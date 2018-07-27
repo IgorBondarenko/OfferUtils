@@ -18,7 +18,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
 
     var currency = "Coins"
 
-    protected var currentBalance: currencyType
+    var currentBalance: currencyType
         get() = dataManager.getData(DataManager.Type.COINS_BALANCE, 0 as currencyType)
         set(value) {
             dataManager.saveData(DataManager.Type.COINS_BALANCE, value)
@@ -34,7 +34,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     fun subtractFromBalance(amount: currencyType){
         subtractFromBalanceRealization(amount)
         activity?.runOnUiThread {
-            animationManager?.changeText(balanceView, "${getBalance()}", AnimationManager.Direction.BOTTOM_TO_TOP)
+            animationManager?.changeText(balanceView, "$currentBalance", AnimationManager.Direction.BOTTOM_TO_TOP)
         }
     }
 
@@ -43,7 +43,7 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
     fun addToBalance(value: currencyType, showToast: Boolean = true, customToast: String = "$value $currency added to your balance"){
         addToBalanceRealization(value)
         activity?.runOnUiThread {
-            animationManager?.changeText(balanceView, getBalance().toString(), AnimationManager.Direction.TOP_TO_BOTTOM)
+            animationManager?.changeText(balanceView, currentBalance.toString(), AnimationManager.Direction.TOP_TO_BOTTOM)
 
             if (showToast) activity?.showLongToast(customToast)
             if (dataManager.getData(DataManager.Type.SETTINGS_SOUND, true)) {
@@ -58,16 +58,16 @@ abstract class BalanceManager<currencyType : Number>(val dataManager: DataManage
      * call in activity onResume()
      */
     fun setCoinsCountInToolbar(activity: Activity) = activity.runOnUiThread {
-        balanceView?.text = getBalance().toString()
+        balanceView?.text = currentBalance.toString()
     }
 
     /**
      * call in fragment onResume()
      */
     fun setBalanceCountInFragmentToolbar(fragment: Fragment) = fragment.activity?.runOnUiThread {
-        balanceView?.text = getBalance().toString()
+        balanceView?.text = currentBalance.toString()
     }
 
-    fun getBalance(): currencyType = currentBalance
+    //fun getBalance(): currencyType = currentBalance
 
 }

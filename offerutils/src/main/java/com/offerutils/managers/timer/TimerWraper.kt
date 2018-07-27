@@ -18,6 +18,8 @@ class TimerWrapper(
     val doOnRepeat: (leftTime: String, leftTimeLong: Long, leftTimePercents: Int) -> Unit,
     val doOnFinish: () -> Unit) {
 
+    var leftTimeWithSeconds = true
+
     private var timerCoroutine: Job? = null
 
     /**
@@ -48,7 +50,7 @@ class TimerWrapper(
     }
 
     private fun timerCoroutine() {
-        doOnRepeat.invoke(timerManager.getLeftTimeCounter(true), timerManager.leftTime, timerManager.getLeftTimeInPercents(timerManager.delay))
+        doOnRepeat.invoke(timerManager.getLeftTimeCounter(leftTimeWithSeconds), timerManager.leftTime, timerManager.getLeftTimeInPercents(timerManager.delay))
         timerManager.checkTimerState(
             onWorkListener = {
                 timerCoroutine = it

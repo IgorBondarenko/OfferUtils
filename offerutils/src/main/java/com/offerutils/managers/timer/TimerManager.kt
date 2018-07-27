@@ -26,7 +26,7 @@ class TimerManager(val dataManager: DataManager, val type: DataManager.Type, var
             val hours = (this / 3600).toInt()
             val minutes = ((this - hours * 3600) / 60).toInt()
             val seconds = (this - (hours * 3600).toLong() - (minutes * 60).toLong()).toInt()
-            "$hours:${(if (minutes < 10) "0$minutes" else minutes)}" + if (withSeconds) ":${if (seconds < 10) "0$seconds" else seconds}" else ""
+            "${if(hours > 0) "$hours:" else ""}${(if (minutes < 10) "0$minutes" else minutes)}" + if (withSeconds) ":${if (seconds < 10) "0$seconds" else seconds}" else ""
         }
 
 

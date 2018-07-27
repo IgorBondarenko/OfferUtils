@@ -9,6 +9,8 @@ fun TextInputLayout.setupEditText(){
     })
 }
 
+fun TextInputLayout.validateEmail(): Boolean = this.validateField(com.offerutils.Utils.validateEmail(getString()), "email")
+
 fun TextInputLayout.validateWallet(): Boolean = this.validateField(com.offerutils.Utils.validateWallet(getString()), "wallet")
 
 fun TextInputLayout.validateName(): Boolean = this.validateField(com.offerutils.Utils.validateName(getString()), "name")
