@@ -18,7 +18,7 @@ import android.widget.TextView
 import com.offerutils.R
 import com.offerutils.extensions.setAnimationListener
 
-class AnimationManager constructor(val context: Context) {
+class AnimationManager constructor(private val context: Context) {
 
     fun changeText(target: TextView?, text: String, direction: Direction) {
 

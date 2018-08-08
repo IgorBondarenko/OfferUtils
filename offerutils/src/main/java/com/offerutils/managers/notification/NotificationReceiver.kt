@@ -14,7 +14,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.util.Log
-import com.offerutils.Utils
+import com.offerutils.utils.CommonUtils
 import com.offerutils.managers.notification.NotificationManager.Companion.EXTRA_PUSH_ACTION
 import com.offerutils.managers.notification.NotificationManager.Companion.EXTRA_PUSH_ID
 import com.offerutils.managers.notification.NotificationManager.Companion.EXTRA_PUSH_LARGE_ICON
@@ -45,7 +45,7 @@ class NotificationReceiver: BroadcastReceiver() {
         }
 
         notificationBuilder
-            .setContentTitle(Utils.getApplicationName(context))
+            .setContentTitle(CommonUtils.getApplicationName(context))
             .setAutoCancel(true)
             .setContentText(message)
             .setSmallIcon(smallIcon)

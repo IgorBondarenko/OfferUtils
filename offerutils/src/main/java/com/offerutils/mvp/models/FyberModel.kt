@@ -17,10 +17,10 @@ interface FyberModel {
         isFyberVideo = false
     }
 
-    var fyberAgreement: Boolean
+    /*var fyberAgreement: Boolean
         get() = dataManager.getData(DataManager.Type.FYBER_CONSENT, false)
         set(value) {
             dataManager.saveData(DataManager.Type.FYBER_CONSENT, value)
-        }
+        }*/
 
 }

@@ -2,58 +2,68 @@ package com.offerutils.extensions
 
 import android.support.design.widget.TextInputLayout
 import android.widget.EditText
+import com.offerutils.utils.ValidationUtils as validationUtil
 
-fun TextInputLayout.setupEditText(){
+
+fun TextInputLayout.setupEditText() {
     editText?.addTextChangedListener(beforeTextChanged = {
         error = null
         isErrorEnabled = false
     })
 }
 
-fun TextInputLayout.validateEmail(): Boolean = this.validateField(com.offerutils.Utils.validateEmail(getString()), "email")
+fun TextInputLayout.validateEmail(): Boolean =
+    this.validateField(validationUtil.validateEmail(getString()), "email")
 
-fun EditText.validateEmail(): Boolean = this.validateField(com.offerutils.Utils.validateEmail(textString), "email")
+fun EditText.validateEmail(): Boolean =
+    this.validateField(validationUtil.validateEmail(stringValue), "email")
 
-fun TextInputLayout.validateWallet(): Boolean = this.validateField(com.offerutils.Utils.validateWallet(getString()), "wallet")
+fun TextInputLayout.validateDefaultWallet(): Boolean =
+    this.validateField(validationUtil.validateWallet(getString()), "wallet")
 
-fun EditText.validateWallet(): Boolean = this.validateField(com.offerutils.Utils.validateWallet(textString), "wallet")
+fun EditText.validateDefaultWallet(): Boolean =
+    this.validateField(validationUtil.validateWallet(stringValue), "wallet")
 
-fun TextInputLayout.validateName(): Boolean = this.validateField(com.offerutils.Utils.validateName(getString()), "name")
+fun TextInputLayout.validateName(): Boolean =
+    this.validateField(validationUtil.validateName(getString()), "name")
 
-fun EditText.validateName(): Boolean = this.validateField(com.offerutils.Utils.validateName(textString), "name")
+fun EditText.validateName(): Boolean =
+    this.validateField(validationUtil.validateName(stringValue), "name")
 
-fun TextInputLayout.validateVisaNumber(): Boolean = this.validateField(com.offerutils.Utils.validateVisa(getString()), "card number")
+fun TextInputLayout.validateVisaNumber(): Boolean =
+    this.validateField(validationUtil.validateString(getString(), validationUtil.regexVisaCard), "card number")
 
-fun EditText.validateVisaNumber(): Boolean = this.validateField(com.offerutils.Utils.validateVisa(textString), "card number")
+fun EditText.validateVisaNumber(): Boolean =
+    this.validateField(validationUtil.validateString(stringValue, validationUtil.regexVisaCard), "card number")
 
-private fun TextInputLayout.validateField(validation: Boolean, fieldType: String): Boolean = when {
-    getString().isEmpty() -> {
-        error = "Empty $fieldType"
+fun TextInputLayout.validateField(validation: Boolean, fieldType: String): Boolean {
+    val showError: (error: String) -> Boolean = {
+        this.error = it
         requestFocus()
         false
     }
-    !validation -> {
-        error = "Incorrect $fieldType"
-        requestFocus()
-        false
+
+    return when {
+        getString().isEmpty() -> showError("Empty $fieldType")
+        !validation -> showError("Incorrect $fieldType")
+        else -> true
     }
-    else -> true
 }
 
-private fun EditText.validateField(validation: Boolean, fieldType: String): Boolean = when {
-    textString.isEmpty() -> {
-        error = "Empty $fieldType"
+fun EditText.validateField(validation: Boolean, fieldType: String): Boolean {
+    val showError: (error: String) -> Boolean = {
+        this.error = it
         requestFocus()
         false
     }
-    !validation -> {
-        error = "Incorrect $fieldType"
-        requestFocus()
-        false
+
+    return when {
+        stringValue.isEmpty() -> showError("Empty $fieldType")
+        !validation -> showError("Incorrect $fieldType")
+        else -> true
     }
-    else -> true
 }
 
 
-private fun TextInputLayout.getString() = editText?.textString ?: ""
+private fun TextInputLayout.getString() = editText?.stringValue ?: ""
 

@@ -1,11 +1,12 @@
 package com.offerutils.mvp.views
 
 import android.app.Activity
+import com.offerutils.extensions.whenFalse
 import com.offerutils.extensions.showLongToast
 import com.offerutils.managers.offers.OfferTypes
 import com.offerutils.managers.offers.OfferwallManager
 
-interface OfferwallView<currencyType: Number> {
+interface OfferwallView<currencyType : Number> {
 
     val offerwallManager: OfferwallManager<currencyType>
 
@@ -21,19 +22,19 @@ interface OfferwallView<currencyType: Number> {
         }
     }
 
-    fun Activity.showVideoRotation(bonusReward: (() -> Unit)? = null, rotationOffers: Array<OfferwallManager.Offer>){
+    fun Activity.showVideoRotation(bonusReward: (() -> Unit)? = null, rotationOffers: Array<OfferwallManager.Offer>) {
         checkOffers(bonusReward, *rotationOffers)
     }
 
     private fun Activity.showOffer(offerName: OfferwallManager.Offer, bonusReward: (() -> Unit)? = null): Pair<Boolean, Boolean> =
-        offerwallManager.getOfferwall(offerName, this).let {
-            val isReady: Boolean = it.apply {
-                if (this is OfferTypes.VideoOffer) {
-                    this.bonusReward = bonusReward
-                }
-            }?.show(this) ?: false
-            Pair(isReady, it is OfferTypes.VideoOffer)
+        with(offerwallManager.getOfferwall(offerName, this)) {
+            val isOfferReady = this?.let {
+                if (it is OfferTypes.VideoOffer) it.bonusReward = bonusReward
+                it.show(this@showOffer)
+            } ?: false
+            Pair(isOfferReady, this is OfferTypes.VideoOffer)
         }
+
 
     private fun Activity.showMultipleOffers(bonusReward: (() -> Unit)? = null, vararg offersName: OfferwallManager.Offer): Pair<Boolean, Boolean> =
         offersName.forEach {

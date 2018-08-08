@@ -12,16 +12,24 @@ fun launchInUIWithDelay(delayTime: Long, action: suspend () -> Unit): Job =
         action.invoke()
     }
 
-fun doAfterTime(day: Int, month: Int, year: Int, doBefore: (() -> Unit)? = null, doAfter: () -> Unit){
-    with(Calendar.getInstance()){
+fun doAfterTime(day: Int, month: Int, year: Int, doBefore: (() -> Unit)? = null, doAfter: () -> Unit) {
+    with(Calendar.getInstance()) {
         set(Calendar.DAY_OF_MONTH, day)
         set(Calendar.MONTH, month)
         set(Calendar.YEAR, year)
 
-        if(System.currentTimeMillis() > this.timeInMillis){
+        if (System.currentTimeMillis() > this.timeInMillis) {
             doAfter()
         } else doBefore?.invoke()
     }
 }
 
-fun Float.format(format: String = "%.2f") : String = String.format(format, this)
+fun Float.format(format: String = "%.2f"): String = String.format(format, this)
+
+infix fun Boolean.whenFalse(action: () -> Unit) {
+    if (!this) action.invoke()
+}
+
+infix fun Int.ifZero(value: Int): Int =
+    if (this == 0) value else this
+

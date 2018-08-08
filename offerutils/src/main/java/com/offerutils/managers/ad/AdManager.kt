@@ -20,11 +20,17 @@ object AdManager {
     val isReady: Boolean
         get() = interstitialsHashMap.values.firstOrNull()?.isReady ?: false
 
-    fun showInterstitial(activity: Activity, onAdCloseListener: (() -> Unit)? = null) {
-        interstitialsHashMap.values.forEach { it.setOnCloseListener(onAdCloseListener) }
-        interstitialsHashMap.values.firstOrNull {
-            it.isReady.apply { if (!this) it.makeRequest(activity) }
-        }?.show(activity)
+    fun showInterstitial(activity: Activity, onAdCloseListener: (() -> Unit)? = null, doAfter: (() -> Unit)? = null) {
+        interstitialsHashMap.values.forEach { it.setOnCloseListener(onAdCloseListener ?: doAfter) }
+        interstitialsHashMap.values.firstOrNull()?.let {
+            when {
+                it.isReady -> it.show(activity)
+                else -> {
+                    doAfter?.invoke()
+                    it.makeRequest(activity)
+                }
+            }
+        }
     }
 
 }

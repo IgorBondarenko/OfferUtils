@@ -6,16 +6,16 @@ import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
 
-var EditText.textString: String
+var EditText.stringValue: String
     get() =  this.text.toString()
     set(value) {
         this.setText(value, TextView.BufferType.EDITABLE)
     }
 
 var TextInputLayout.textString: String
-    get() = this.editText?.textString ?: ""
+    get() = this.editText?.stringValue ?: ""
     set(value) {
-        this.editText?.textString = value
+        this.editText?.stringValue = value
     }
 
 fun EditText.addTextChangedListener(beforeTextChanged: () -> Unit, afterTextChanged: ((editable: Editable?) -> Unit)? = null) {

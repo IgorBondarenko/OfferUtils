@@ -6,7 +6,7 @@ interface RuModel {
 
     val dataManager: DataManager
 
-    var isRuShown: Boolean
+    /*var isRuShown: Boolean
         get() = dataManager.getData(DataManager.Type.SHOW_RATE_US_DIALOG, false)
         set(value) {
             dataManager.saveData(DataManager.Type.SHOW_RATE_US_DIALOG, value)
@@ -14,7 +14,7 @@ interface RuModel {
 
     fun setRuShown(){
         isRuShown = true
-    }
+    }*/
 
     var isRated: Boolean
         get() = dataManager.getData(DataManager.Type.RATE_US, false)
