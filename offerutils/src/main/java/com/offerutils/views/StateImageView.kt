@@ -3,11 +3,12 @@ package com.offerutils.views
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.StateListDrawable
+import android.support.v7.widget.AppCompatImageView
 import android.util.AttributeSet
 import android.widget.ImageView
 import com.offerutils.R
 
-class StateImageView(context: Context, attrs: AttributeSet) : ImageView(context, attrs) {
+class StateImageView(context: Context, attrs: AttributeSet) : AppCompatImageView(context, attrs) {
 
     init {
         initAttrs(context, attrs)
