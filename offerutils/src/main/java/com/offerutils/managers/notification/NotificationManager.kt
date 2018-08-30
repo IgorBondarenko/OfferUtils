@@ -4,6 +4,7 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.support.annotation.DrawableRes
 
 class NotificationManager {
@@ -46,15 +47,14 @@ class NotificationManager {
             alarmManagerAction(alarmManager, pendingIntent)
         }
     }
-
-    data class SingleNotification(override var notificationId: Int, override var action: String, override var delay: Long, override var message: String, @DrawableRes override var smallIcon: Int, @DrawableRes override var largeIcon: Int) :
-        NotificationType(notificationId, action, delay, message, smallIcon, largeIcon)
-
-    data class RepeatingNotification(override var notificationId: Int, override var action: String, override var delay: Long, override var message: String, @DrawableRes override var smallIcon: Int, @DrawableRes override var largeIcon: Int) :
-
-        NotificationType(notificationId, action, delay, message, smallIcon, largeIcon)
-
-    abstract class NotificationType(open val notificationId: Int, open val action: String, open val delay: Long, open var message: String, @DrawableRes open var smallIcon: Int, @DrawableRes open var largeIcon: Int)
-
 }
+
+data class SingleNotification(override var notificationId: Int, override var action: String, override var delay: Long, override var message: String, @DrawableRes override var smallIcon: Int, @DrawableRes override var largeIcon: Int) :
+    NotificationType(notificationId, action, delay, message, smallIcon, largeIcon)
+
+data class RepeatingNotification(override var notificationId: Int, override var action: String, override var delay: Long, override var message: String, @DrawableRes override var smallIcon: Int, @DrawableRes override var largeIcon: Int) :
+
+    NotificationType(notificationId, action, delay, message, smallIcon, largeIcon)
+
+abstract class NotificationType(open val notificationId: Int, open val action: String, open val delay: Long, open var message: String, @DrawableRes open var smallIcon: Int, @DrawableRes open var largeIcon: Int)
 

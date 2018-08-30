@@ -1,5 +1,7 @@
 package com.offerutils.extensions
 
+import android.annotation.SuppressLint
+import android.os.Build
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.delay
@@ -23,6 +25,9 @@ fun doAfterTime(day: Int, month: Int, year: Int, doBefore: (() -> Unit)? = null,
         } else doBefore?.invoke()
     }
 }
+
+@SuppressLint("NewApi")
+val isApiMoreThanNougat =  Build.VERSION.SDK_INT >= Build.VERSION_CODES.O
 
 fun Float.format(format: String = "%.2f"): String = String.format(format, this)
 

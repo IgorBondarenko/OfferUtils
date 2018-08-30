@@ -13,6 +13,7 @@ import android.graphics.BitmapFactory
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.support.v4.app.NotificationCompat
 import android.util.Log
 import com.offerutils.utils.CommonUtils
 import com.offerutils.managers.notification.NotificationManager.Companion.EXTRA_PUSH_ACTION
@@ -23,16 +24,19 @@ import com.offerutils.managers.notification.NotificationManager.Companion.EXTRA_
 
 class NotificationReceiver: BroadcastReceiver() {
 
+    private companion object {
+        const val CHANNEL_ID = "1"
+    }
+
     override fun onReceive(context: Context, intent: Intent?) {
 
-        val notificationBuilder = Notification.Builder(context)
+        val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
 
-        val defaultIcon = context.packageManager.getApplicationIcon(context.applicationContext?.packageName)
+//        val defaultIcon = context.packageManager.getApplicationIcon(context.applicationContext?.packageName)
 
         val message = intent?.getStringExtra(EXTRA_PUSH_MESSAGE)
         val smallIcon = intent?.getIntExtra(EXTRA_PUSH_SMALL_ICON, 0) ?: 0
         val largeIcon = intent?.getIntExtra(EXTRA_PUSH_LARGE_ICON, 0) ?: 0
-
         val notificationId = intent?.getIntExtra(EXTRA_PUSH_ID, 0) ?: 0
 
         Log.d("CURRENT_PACKAGE_", "${context.applicationContext?.packageName}")
@@ -49,18 +53,19 @@ class NotificationReceiver: BroadcastReceiver() {
             .setAutoCancel(true)
             .setContentText(message)
             .setSmallIcon(smallIcon)
-            .setLargeIcon(largeIcon ifZero getBitmap(defaultIcon))
-            .setStyle(Notification.BigTextStyle().bigText(message))
+            .setLargeIcon(getBitmap(context.resources.getDrawable(largeIcon)))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(message))
             .setDefaults(Notification.DEFAULT_SOUND)
             .setContentIntent(PendingIntent.getActivity(context, notificationId, splashIntent, 0))
 
+
         with(context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager) {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                with(NotificationChannel("1", "Main channel", NotificationManager.IMPORTANCE_DEFAULT)) {
+                with(NotificationChannel(CHANNEL_ID, "Main channel", NotificationManager.IMPORTANCE_DEFAULT)) {
                     enableVibration(true)
                     createNotificationChannel(this)
-                    notificationBuilder.setChannelId("1")
                 }
+                notificationBuilder.setChannelId(CHANNEL_ID)
             }
 
             notify(notificationId, notificationBuilder.build())
